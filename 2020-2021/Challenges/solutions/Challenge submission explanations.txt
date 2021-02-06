@@ -1,0 +1,106 @@
+CHALLENGE 1:
+
+Hi everyone,
+
+Today we went through all the solutions from the different teams for last week's challenge. Below are summaries of the solutions:
+
+Pratyaksh's team:
+ - Greedy (for each move, work out which swap gives the most score in the short term (1 step), then take that one)
+ - Optimised greedy (Same as the greedy solution, but limits the allowed swaps to encourage ordering that isn't just on the local scale)
+
+Akilan's team:
+ - Sorting (Moves values that are lower to the lower value end of the list and higher values to the higher end... I think)
+
+Joe's team:
+ - Greedy (same as for Pratyaksh's team, but slightly less optimised)
+ - Local moving sum value function (Takes a moving sum of the entire list and uses that to migrate lover values to areas with other low values and high values to concentrations of high values (ran out of time to run this algorithm))
+
+We also discussed the plans for the next few weeks today and decided that we want to do another one of these competitions but, as there are exams next week, it will be in two weeks' time (and we'll send out the problem before it begins next time so there is a bit more time for the teams to think about it)
+
+Apart from doing these competitions, I think it would also be fun to do a CTF. For those who don't know what that is, it is where the teams are given a bunch of problems and they have to Capture The Flag. The flag is usually a short string that is hidden in some way. For example, one (difficult) question could be:
+What is the message hidden in this obfuscated string:
+MTE2MTIxMTEyMTAxMDMyMDM0MDk5MDM1MDMyMTA1MTE1MDMyMDk4MDk3MTAwMDM0MDMyMTA1MTEwMDMyMDM1MTAzMTAxMTEwMTAxMTE0MDk3MTA4MDMyMTA1MTAyMDMyMTIxMTExMTE3MDMyMTAyMTExMTE3MTEwMTAwMDMyMTE2MTA0MTA1MTE1MDMyMTA5MTAxMTE1MTE1MDk3MTAzMTAx
+
+Next week we were talking about doing a debate, but I only want to do debates on things we have people who feel strongly about on both sides, and I can't think of any topics that tick that box at the moment. Instead, I suggest we do a tutorial on encryption, and other things that might come up in a CTF to prepare for it. I'd be happy to prepare something, but I want to see what people think of it before committing to it.
+
+Also, If anyone has any projects or anything else they want to show us  (I'm looking at you, Akilan) please message me, and If you want to see a talk on anything specifically I'm sure we can find someone to do it.
+
+Links:
+https://github.com/Joseph-Rance/Programming-Soc
+https://discord.gg/BaS7hn
+
+Hope to see you next week.
+
+Thanks,
+
+Joseph
+
+CHALLENGE 2:
+
+Hi everyone,
+
+Thanks to everyone who came joined in with the 2nd Computing Society coding challenge. Results can be found here: https://comsoc.web.app/competitions
+
+Firstly, here's a quick update about the arm:
+
+I found out earlier this week that the money will be available when we come back after the holidays, so I'll contact the different teams about what they can start doing before we can start receiving components. We also need to decide about how the societies will be run over the holidays. I definitely want to get some of the ML stuff done over that time, but I'm unsure about whether people still want to attend the weekly meetings over the holidays. I'll put a poll out in the Discord server to see what people think about that. I expect we will continue to hold meetings, but they will be mainly opportunities for the teams to catch up with what each other are doing rather than structured sessions. Hopefully some teams will have made enough progress by September to begin doing tutorials on what they have learnt then.
+
+The rest of this email will be about today's Com Soc session.
+
+Well done to everyone that took part in the challenge today. We had smaller teams this week, but everyone managed to submit an answer in the end.
+
+We won't do a session where we go through the solutions of different teams this time because I want to get started with the arm as soon as possible, so I've explained the solutions below. We've been definitely really lucky in both of these challenges to see such a varied set of methods.
+
+Below shows today's leaderboard (https://comsoc.web.app/competitions):
+
+Scores for individual questions:
+Joe & Peter: (A: 250, B:1688, C:177, D:312, E:358)
+Pratyaksh & Arnav: (A: 250, B: 0, C: 230, D: 312, E: 350)
+
+Akilan's team also sent in a submission after the timer stopped. Here are their scores:
+A:     176
+B:     0
+C:     0
+D:     292
+E:     267
+Total: 744
+
+I've attached the problem to this email so if anyone who didn't take part wants to read through these solutions the question is there.
+
+As I said earlier, we had a really large variety of techniques this time round. I'll start with the technique taken by me and Peter, as it was the simplest. The way we approached this problem was to see that each element in the list could be assigned some value which indicates how much it contributes to the total of the list. In the question attached, I suggested that numbers at the start or end of the list may be more or less important. We decided that the end of the list would be more important (as L would be less there so their values would be reduced by less). We also knew that the amount the new elements was divided by would increase linearly, so we can say that that the values added might decrease quadratically as we go along the list (as the list is distributed uniformly). This means that we can create our value function as:
+
+value(index) = a * index^2 + list[index],
+
+Where the index is squared to represent that quadratic increase in importance as we travel left in the list. Because we are weighting the value of the element by its position, a more correct function may have been:
+
+value(index) = index^2 * list[index],
+
+but I didn't think of that so we didn't do it.
+
+Because we did addition, we also needed to add a weighting variable, a, so that neither part of the sum was too much bigger than the other. For example, if we had a list of 10 elements between 1 and 1000 and we didn't weight the index, we could have index = 5 and element = 500. So the value would be 525. Because we didn't weight the index, it didn't have much effect on the overall value here (525 = ~500).
+We had to use trial and error to find a good value for a in each task, as we didn't have times for graphs etc.
+
+We then found values for each of the elements in the list and picked the indexes with the highest values. Our code can be found at this link: https://colab.research.google.com/drive/1fknxX_3xQpXeBy9-YhVY-1-8pQlVyhp7?usp=sharing, along with optimised values for our parameter, a, for each task.
+
+Akilan and Hesara's technique was very different to the approach taken by me and Peter. They began by ordering the list from smallest to largest. They then calculated the distance each value had travelled from its position on the original list to the new sorted list. They then removed values that moved the longest distance.
+
+One interesting thing about these solutions is how this one takes such a macro view of the list as a whole, while our solution took a view of each individual element. Both views are valid, and I suspect our one will perform better in problems with a small number of swaps while Akilan's will perform better in ones with a high b:n ratio. Interestingly, they opted for sorting the list from smallest to largest, while Peter and I did the opposite. Akilan's team's code is attached to this email.
+
+Finally, we have Pratyaksh's method, which was hands down the best solution we have seen for any of these competitions. The approach taken was much like gradient descent: they began by calculating the derivatives of the score wrt each final value.
+An image of his working is below, but I'll do my best to explain each line.
+
+He knows that, because the last element is set the L, the derivative of L wrt the last element element is 1 (dD/dd = 1). He also knows that the new element added in on the second update is independent of the old value of L that we are trying to differentiate with respect to, so we can then differentiate the new value of L wrt the old value (dC/dD=1-c/D^2), and then use the chain rule to find the derivative of the updated value of L wrt the value of the last element (dC/dd = dC/dD * dD/dd = (1-1/D^2) * 1 = 1). He can then repeat the process until he finds the derivative of the final value wrt each element in the list. Once he does that he can pick which values to remove by seeing which dL/dx is the largest (where x is an element in the list). I apologise if I've made a mistake there in those workings.
+
+Here's a picture of his workings:
+[If you want this picture, email me]
+
+Here's a link to his code:
+https://colab.research.google.com/drive/10Eo96gDg280YY4nTIq-E8CRARUaiGMLY?usp=sharing
+
+Finally, here are the links to our Discord and GitHub
+
+Thanks to everyone who took part this week and I hope to see you next week.
+
+Thanks,
+
+Joseph

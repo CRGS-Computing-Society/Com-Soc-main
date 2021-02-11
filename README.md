@@ -2,7 +2,7 @@
 
 Computing Society main repo.
 
-The planned topics for each week are here: ![google slides](https://docs.google.com/spreadsheets/d/10eiRdfVfPTmtPPCpNfP9WqBM-Wdjg3XjRkx_iP0v-48/edit?usp=sharing)
+The planned topics for each week are here: [google slides](https://docs.google.com/spreadsheets/d/10eiRdfVfPTmtPPCpNfP9WqBM-Wdjg3XjRkx_iP0v-48/edit?usp=sharing)
 
 Old repo: https://github.com/Joseph-Rance/Computing-Soc-old
 

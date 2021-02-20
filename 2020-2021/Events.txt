@@ -33,3 +33,4 @@ List of 1 hour events we did in 2020/21 (I still have a lot of this material/rec
  - Using Reinforcement Learning to generate tactical policies in the sport of fencing presentation
  - Methods and uses of NLP in education presentation
  - Self driving cars presentation and Rust presentation (both 30 mins)
+ - CTF (start: c2dna2g6Ly93aXJldi50bGx0b3YueGxuL3Vyb3Yvdy8xNklCWVNCang5Y1hXajdzWGY2MmF1d2JZWVNtNkVrYXEvZXJ2ZD9maGs9aHN6aXJtdA==)

@@ -37,7 +37,7 @@ List of 1 hour events we did in 2020/21 (I still have a lot of this material/rec
 
 <hr>
 
-24/02/21 Year 12s take over
+24/02/21 Year 12s take over:
 
  - Year 13 NEA Discussion
  - Quantum Computing
